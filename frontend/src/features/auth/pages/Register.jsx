@@ -13,12 +13,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleRegister({username,email,password})
-    navigate("/")
+    await handleRegister({ username, email, password });
+    navigate("/");
   };
 
-  if(loading){
-    return (<main><h1>Loading......</h1></main>)
+  if (loading) {
+    return (
+      <main className="loading-screen">
+        <h1>Loading......</h1>
+      </main>
+    );
   }
 
   return (
