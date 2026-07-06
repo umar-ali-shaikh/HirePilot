@@ -270,9 +270,9 @@ Return ONLY JSON.
 
 async function generatePdfFromHtml(htmlContent) {
     const browser = await puppeteer.launch({
+        executablePath: await chromium.executablePath(),
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
         headless: chromium.headless,
     });
 
@@ -283,7 +283,7 @@ async function generatePdfFromHtml(htmlContent) {
             waitUntil: "networkidle0",
         });
 
-        const pdfBuffer = await page.pdf({
+        return await page.pdf({
             format: "A4",
             printBackground: true,
             margin: {
@@ -293,8 +293,6 @@ async function generatePdfFromHtml(htmlContent) {
                 right: "15mm",
             },
         });
-
-        return pdfBuffer;
     } finally {
         await browser.close();
     }
