@@ -61,58 +61,65 @@ async function registerUserController(req, res) {
 
 async function loginUserController(req, res) {
     try {
-
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Email and password are required",
+            });
+        }
 
         const user = await userModel.findOne({ email });
 
         if (!user) {
             return res.status(400).json({
-                message: "Invalid email or password"
+                message: "Invalid email or password",
             });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
-
         if (!isPasswordValid) {
             return res.status(400).json({
-                message: "Invalid email or password"
+                message: "Invalid email or password",
             });
         }
 
         const token = jwt.sign(
-            { id: user._id, username: user.username },
+            {
+                id: user._id,
+                username: user.username,
+            },
             process.env.JWT_SECRET,
-            { expiresIn: "1d" }
+            {
+                expiresIn: "1d",
+            }
         );
-        console.log("Generated Token:", token);
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "None",
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
 
-
         return res.status(200).json({
-            message: "User loggedIn successfully",
+            message: "User logged in successfully",
             user: {
                 id: user._id,
                 username: user.username,
-                email: user.email
-            }
+                email: user.email,
+            },
         });
 
-    } catch (err) {
-        console.error("LOGIN ERROR:", err);
+    } catch (error) {
+        console.error(error);
+
         return res.status(500).json({
-            message: err.message
+            message: "Internal Server Error",
         });
     }
 }
-
 
 /**
  * @name logoutUserController

@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5174",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const authrouter = require("./routes/auth.routes");
-const interviewRouter = require("./routes/interview.routes")
+const interviewRouter = require("./routes/interview.routes");
 
 // Routes
 app.use("/api/auth", authrouter);
