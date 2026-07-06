@@ -23,12 +23,12 @@ main {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 20px;
-                color: #161616;
 
                 label {
                     margin-bottom: 8px;
                     font-size: 16px;
                     font-weight: 500;
+                    color: #161616;
                 }
 
                 input {
@@ -70,6 +70,7 @@ main {
 
     p {
         margin-top: 10px;
+        color: #161616;
     }
 }
 
