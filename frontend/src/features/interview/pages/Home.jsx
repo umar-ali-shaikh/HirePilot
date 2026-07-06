@@ -30,7 +30,6 @@ const Home = () => {
       </main>
     );
   }
-  console.log(reports);
   return (
     <main className="home">
       <div className="interview-input-group">

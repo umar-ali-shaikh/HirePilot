@@ -14,8 +14,6 @@ const Login = () => {
 
     try {
       await handleLogin({ email, password });
-
-      console.log("Navigating...");
       navigate("/");
     } catch (err) {
       console.error(err);
