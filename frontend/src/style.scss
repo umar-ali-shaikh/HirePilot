@@ -1,0 +1,24 @@
+@use "./style/button.scss";
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    background-color: #161616;
+    color: whitesmoke;
+}
+
+.highlight {
+    color: rgb(194, 9, 9);
+}
+
+.loading-screen {
+    background: linear-gradient(135deg, #0f172a 0%, #111827 40%, #030712 100%);
+    color: #fff;
+}

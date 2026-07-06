@@ -1,0 +1,99 @@
+// _button.scss
+
+$primary-start: #3b82f6;
+$primary-middle: #7c3aed;
+$primary-end: #ec4899;
+
+$text-color: #ffffff;
+
+$radius: 14px;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 28px;
+
+  border: none;
+  outline: none;
+
+  border-radius: $radius;
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .3px;
+
+  cursor: pointer;
+
+  transition: all .35s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+}
+
+.primary-button {
+
+  color: $text-color;
+
+  background: linear-gradient(
+    135deg,
+    $primary-start,
+    $primary-middle,
+    $primary-end
+  );
+
+  background-size: 220%;
+
+  box-shadow:
+    0 10px 25px rgba(59,130,246,.25),
+    0 18px 45px rgba(124,58,237,.30);
+
+  &::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.35),
+      transparent
+    );
+
+    transform: translateX(-130%);
+
+    transition: .6s;
+  }
+
+  &:hover {
+
+    background-position: right;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 18px 40px rgba(59,130,246,.35),
+      0 25px 55px rgba(124,58,237,.45);
+
+    &::before {
+      transform: translateX(130%);
+    }
+
+  }
+
+  &:active {
+
+    transform: scale(.97);
+
+  }
+
+}
